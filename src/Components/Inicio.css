@@ -1,0 +1,42 @@
+.centerColumContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen {
+  width: 200px;
+  height: 200px;
+}
+
+.title {
+  color: #fff;
+  font-size: 45px;
+  font-weight: 600;
+}
+
+.content {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  width: 800px;
+  text-align: center;
+}
+
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 25px; /* Adjust the font size for extra small screens */
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 767px) {
+  .title {
+    font-size: 25px; /* Adjust the font size for small screens */
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .title {
+    font-size: 30px; /* Adjust the font size for medium screens */
+  }
+}

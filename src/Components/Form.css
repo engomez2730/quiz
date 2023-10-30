@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 600px;
+  background-color: #fff;
+  height: 60vh;
+  border-radius: 5px;
+}
+
+.forItem {
+  width: 70%;
+}
+
+@media screen and (max-width: 576px) {
+  .form {
+    height: 70vh;
+  }
+}
