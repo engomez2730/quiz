@@ -17,7 +17,7 @@ function MyResponsiveTypography() {
         </div>
       </Col>
       <Col xs={24} sm={24} md={24} lg={24} className="centerColumContent">
-        <img src="images/logo.png" alt="imagen" className="imagen" />
+        <img src="logo.png" alt="imagen" className="imagen" />
       </Col>
       <Col xs={24} sm={24} md={24} lg={24} className="centerColumContent">
         <Link to="/form">
