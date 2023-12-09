@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import InicioComponent from "./Components/Inicio"; // Updated import
 import Quiz from "./Components/Quiz";
+import Result from "./Components/Result";
 import "./App.css";
 import Form from "./Components/Form";
-
+import Admin from "./Components/Admin/Admin";
 function App() {
   return (
     <div className="app">
@@ -12,6 +13,8 @@ function App() {
           <Route path="/" element={<InicioComponent />} />
           <Route path="/form" element={<Form />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/result" element={<Result />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </div>

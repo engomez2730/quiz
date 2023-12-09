@@ -3,6 +3,7 @@ import { setUser } from "../Redux/Slices/UserSLice";
 import { Button, Col, Form, Input, Row, message } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import "./Form.css";
 
@@ -11,12 +12,22 @@ const App = () => {
   const [form] = Form.useForm();
   const history = useNavigate();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-    dispatch(setUser(values));
-    form.resetFields();
-    message.success("Usuario Creado con exito", 3);
-    history("/quiz");
+  const onFinish = async (values) => {
+    try {
+      const data = await axios.post("http://localhost:5000/api/v1/questions", {
+        name: values.name,
+        lastName: values.lastName,
+        email: values.email,
+        companyName: values.companyName,
+      });
+      console.log("Success:", values);
+      dispatch(setUser(data.data.user));
+      form.resetFields();
+      message.success("Usuario Creado con exito", 3);
+      history("/quiz");
+    } catch (err) {
+      message.error(err.message, 3);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -63,7 +74,7 @@ const App = () => {
             className="forItem"
             size="large"
             label="Name"
-            name="nombre"
+            name="name"
             rules={[
               {
                 required: true,
@@ -77,7 +88,7 @@ const App = () => {
           <Form.Item
             className="forItem"
             label="Last Name"
-            name="apellido"
+            name="lastName"
             rules={[
               {
                 required: true,
@@ -90,7 +101,7 @@ const App = () => {
           <Form.Item
             className="forItem"
             label="Email"
-            name="correo"
+            name="email"
             rules={[
               {
                 required: true,
@@ -103,7 +114,7 @@ const App = () => {
           <Form.Item
             className="forItem"
             label="Company Name"
-            name="company"
+            name="companyName"
             rules={[
               {
                 required: true,

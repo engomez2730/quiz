@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, message } from "antd";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { questions } from "../Utils/Data";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../Redux/Slices/UserSLice";
+
 import "./Quiz.css";
 
 function Quiz() {
@@ -10,15 +15,18 @@ function Quiz() {
   const [textResponse, setTextResponse] = useState("");
   const [score, setScore] = useState(0);
   const [responses, setResponses] = useState([]);
-  const history = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isLastQuestion = currentStep === questions.length - 1;
+  const userData = useSelector((state) => state.user);
 
   useEffect(() => {
     // Load the user's previous response for the current question if available
     const savedResponse = responses.find(
       (response) => response.question === questions[currentStep].question
     );
+
     if (savedResponse) {
       if (questions[currentStep].type === "text") {
         setTextResponse(savedResponse.answer);
@@ -31,37 +39,119 @@ function Quiz() {
     }
   }, [currentStep, responses]);
 
+  const submitQuiz = async (updatedResponses) => {
+    try {
+      const data = await axios.patch(
+        `http://localhost:5000/api/v1/questions/${userData?.user?._id}`,
+        {
+          questions: updatedResponses || responses,
+          score: score,
+        }
+      );
+
+      dispatch(setUser(data.data.user));
+      navigate("/result");
+
+      message.success("Quiz terminado");
+    } catch (err) {
+      message.error(err.message);
+    }
+  };
+
   const next = () => {
+    // Handling text questions
     if (currentQuestion.type === "text") {
       if (textResponse.trim() === "") {
         message.error("Please enter your answer", 2);
         return;
       }
+
+      const responseObj = {
+        question: questions[currentStep].question,
+        answer: textResponse,
+        isScore: questions[currentStep].isScore,
+      };
+
+      const updatedResponses = [...responses];
+      const existingResponseIndex = updatedResponses.findIndex(
+        (response) => response.question === questions[currentStep].question
+      );
+
+      if (existingResponseIndex !== -1) {
+        updatedResponses[existingResponseIndex] = responseObj;
+      } else {
+        updatedResponses.push(responseObj);
+      }
+
+      if (questions[currentStep].isScore) {
+        setScore(score + 2.77);
+      } else {
+        setScore(score + 0); // Adding 0 if isScore is false
+      }
+
+      setResponses(updatedResponses);
     } else {
+      // Handling multiple choice questions
       if (selectedAnswer === null) {
         message.error("Please select an answer.", 2);
         return;
       }
-    }
 
-    const responseObj = {
-      question: questions[currentStep].question,
-      answer: selectedAnswer || textResponse,
-    };
+      const responseObj = {
+        question: questions[currentStep].question,
+        answer: selectedAnswer,
+        isScore: questions[currentStep].isScore,
+      };
 
-    const updatedResponses = responses.filter(
-      (response) => response.question !== questions[currentStep].question
-    );
-    updatedResponses.push(responseObj);
+      const updatedResponses = [...responses];
+      const existingResponseIndex = updatedResponses.findIndex(
+        (response) => response.question === questions[currentStep].question
+      );
 
-    setResponses(updatedResponses);
+      if (existingResponseIndex !== -1) {
+        updatedResponses[existingResponseIndex] = responseObj;
+      } else {
+        updatedResponses.push(responseObj);
+      }
 
-    if (selectedAnswer === questions[currentStep].correctAnswer) {
-      setScore(score + 1);
+      if (selectedAnswer === "Yes" && questions[currentStep].isScore) {
+        setScore(score + 2.77);
+      } else {
+        setScore(score + 0); // Adding 0 if conditions are not met
+      }
+
+      setResponses(updatedResponses);
     }
 
     if (currentStep === questions.length - 1) {
-      history("/");
+        
+      if (questions[currentStep].type === "text") {
+        // Check for the text-type last question to add it to responses
+        if (textResponse.trim() === "") {
+          message.error("Please enter your answer for the last question", 2);
+          return;
+        }
+
+        const responseObj = {
+          question: questions[currentStep].question,
+          answer: textResponse,
+          isScore: questions[currentStep].isScore,
+        };
+
+        const updatedResponses = [...responses];
+        updatedResponses.push(responseObj);
+
+        if (questions[currentStep].isScore) {
+          setScore(score + 2.77);
+        } else {
+          setScore(score + 0); // Adding 0 if isScore is false
+        }
+
+        setResponses(updatedResponses);
+        submitQuiz(updatedResponses);
+      } else {
+        message.error("Please answer the last question", 2);
+      }
     } else {
       setCurrentStep(currentStep + 1);
     }
