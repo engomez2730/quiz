@@ -1,12 +1,13 @@
 // store.js
 
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./Slices/UserSLice"; // Import the user slice
+import userReducer from "./Slices/UserSLice"; // Import the user
+import LoginSlice from "./Slices/LoginSlice";
 
 const store = configureStore({
   reducer: {
     user: userReducer, // Add the user reducer to your store
-    // Add other reducers if you have any
+    login: LoginSlice,
   },
 });
 

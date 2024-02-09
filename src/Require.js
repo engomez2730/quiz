@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default (ChildComponent) => {
   const ComposedComponent = (props) => {
     var navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
     const AmILoggedIn = () => {
-      if (!props?.isLoggedIn?.isLoggedIn || props.user.user?.rol !== "admin") {
+      if (isLoggedIn) {
         navigate("/");
       }
     };
@@ -17,8 +18,5 @@ export default (ChildComponent) => {
     return <ChildComponent {...props} />;
   };
 
-  const mapStateToProps = (state) => {
-    return { isLoggedIn: state.isLoggedIn, user: state.user };
-  };
-  return connect(mapStateToProps)(ComposedComponent);
+  return ComposedComponent;
 };

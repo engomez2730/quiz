@@ -41,19 +41,21 @@ function Quiz() {
 
   const submitQuiz = async (updatedResponses) => {
     try {
-      const data = await axios.patch(
-        `http://localhost:5000/api/v1/questions/${userData?.user?._id}`,
-        {
-          questions: updatedResponses || responses,
-          score: score,
-        }
-      );
+      const data = await axios.post(`http://localhost:5000/api/v1/questions/`, {
+        name: userData.user.name,
+        lastName: userData.user.lastName,
+        email: userData.user.email,
+        companyName: userData.user.companyName,
+        questions: updatedResponses || responses,
+        score: Math.round(score),
+      });
 
       dispatch(setUser(data.data.user));
       navigate("/result");
 
       message.success("Quiz terminado");
     } catch (err) {
+      console.log(err);
       message.error(err.message);
     }
   };
@@ -84,7 +86,7 @@ function Quiz() {
       }
 
       if (questions[currentStep].isScore) {
-        setScore(score + 2.77);
+        setScore(score + 2.7);
       } else {
         setScore(score + 0); // Adding 0 if isScore is false
       }
@@ -115,7 +117,7 @@ function Quiz() {
       }
 
       if (selectedAnswer === "Yes" && questions[currentStep].isScore) {
-        setScore(score + 2.77);
+        setScore(score + 2.7);
       } else {
         setScore(score + 0); // Adding 0 if conditions are not met
       }
@@ -124,7 +126,6 @@ function Quiz() {
     }
 
     if (currentStep === questions.length - 1) {
-        
       if (questions[currentStep].type === "text") {
         // Check for the text-type last question to add it to responses
         if (textResponse.trim() === "") {
@@ -142,7 +143,7 @@ function Quiz() {
         updatedResponses.push(responseObj);
 
         if (questions[currentStep].isScore) {
-          setScore(score + 2.77);
+          setScore(score + 2.7);
         } else {
           setScore(score + 0); // Adding 0 if isScore is false
         }
@@ -176,7 +177,7 @@ function Quiz() {
   return (
     <div>
       <div className="quiz-content">
-        <h2 className="labelPregunta">Question number {currentStep + 1}</h2>
+        <h2 className="labelPregunta">Question {currentStep + 1}</h2>
         <h3 className="labelPreguntas">{currentQuestion.question}</h3>
         {currentQuestion.type === "text" ? (
           <Input

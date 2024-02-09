@@ -1,5 +1,5 @@
 import React from "react";
-import { SmileOutlined } from "@ant-design/icons";
+import { CheckOutlined } from "@ant-design/icons";
 import { Result } from "antd";
 import { useSelector } from "react-redux";
 import "./Result.css";
@@ -10,13 +10,8 @@ const ResultComponent = () => {
     <div className="result">
       {" "}
       <Result
-        icon={<SmileOutlined />}
-        title="Congratulations, you have completed all questions correctly."
-        extra={
-          <h1>
-            Your Score was: {userData?.user?.score ? userData?.user?.score : 0}
-          </h1>
-        }
+        icon={<CheckOutlined style={{ color: "#1f2246" }} />}
+        title="Thank you for completing the assessment!"
       />
     </div>
   );

@@ -14,14 +14,7 @@ const App = () => {
 
   const onFinish = async (values) => {
     try {
-      const data = await axios.post("http://localhost:5000/api/v1/questions", {
-        name: values.name,
-        lastName: values.lastName,
-        email: values.email,
-        companyName: values.companyName,
-      });
-      console.log("Success:", values);
-      dispatch(setUser(data.data.user));
+      dispatch(setUser(values));
       form.resetFields();
       message.success("Usuario Creado con exito", 3);
       history("/quiz");

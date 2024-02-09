@@ -4,6 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import "./Admin.css";
 import axios from "axios";
 import User from "./User";
+import Require from "../../Require";
 
 const Admin = () => {
   const [users, setUsers] = useState();
@@ -135,4 +136,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Require(Admin);

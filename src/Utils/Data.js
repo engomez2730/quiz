@@ -2,7 +2,7 @@ export const questions = [
   {
     question:
       "How easy is to implement policies and procedures in your organization?",
-    options: ["Easy", "Moderately easy", "Takes time and effort", "Madrid"],
+    options: ["Easy", "Moderately easy", "Takes time and effort"],
     type: "multipleChoice",
     isScore: false,
   },
@@ -55,13 +55,13 @@ export const questions = [
 
   {
     question:
-      "How many hardware are currently active (connected to the network): laptops, desktops, phones, routers, modems, servers, other devices?",
+      "How many devices are currently active (connected to the network): laptops, desktops, phones, routers, modems, servers, other devices?",
     type: "text",
     isScore: false,
   },
 
   {
-    question: "Is your corporate network access protected by a key (password)?",
+    question: "Is your corporate network protected by a key (password)?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,
@@ -75,7 +75,7 @@ export const questions = [
   },
   {
     question:
-      "Can your clients and suppliers connect to your corporate network when they visit your company's premise?",
+      "Can your clients and suppliers connect to your main network when they visit your company's premise?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,
@@ -96,13 +96,14 @@ export const questions = [
   },
   {
     question:
-      "Is your organization using Windows as an operating system? If so, is it under license?",
+      "Is your organization using Windows as operating system? If so, is it under license?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,
   },
   {
-    question: "Is your organization storing data in the cloud?",
+    question:
+      "Is your organization storing data in the cloud, or uses applications hosted in the cloud ?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,
@@ -122,7 +123,7 @@ export const questions = [
   },
   {
     question:
-      "What is the maximum time to deactivate an account once an employee has left the company?",
+      "What is the maximum time (in days) to deactivate an account once an employee has left the company?",
     type: "text",
     isScore: false,
   },
@@ -142,7 +143,7 @@ export const questions = [
   },
   {
     question:
-      "For those software applications with licenses, are they being updated when required?",
+      "Are softwares and systems being updated when patches become available?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,
@@ -156,7 +157,7 @@ export const questions = [
   },
   {
     question:
-      "Has the organization been exposed to security training in the last 2 years?",
+      "Has the organization been exposed to information security training in the last 2 years?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,
@@ -170,7 +171,7 @@ export const questions = [
   },
   {
     question:
-      "Is the information about your company, other companies, and individuals sensitive enough that its disclosure to the public may cause major damage to the reputation of your company?",
+      "Is the information managed in your company sensitive enough that its disclosure to the public may cause major damage to its reputation ?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,
@@ -192,7 +193,7 @@ export const questions = [
   {
     question:
       "Are software acquired in the market or developed in-house to fit the company needs?",
-    options: ["Market", "In-house"],
+    options: ["Market", "In-house", "Both"],
     isScore: false,
   },
   {
@@ -267,7 +268,7 @@ export const questions = [
   },
   {
     question:
-      "Do you understand which are the key processes in your business and can safely restore the data in case of a security incident? (caused unintentionally by an employee or as a result of a malicious attack)",
+      "Do you understand the key processes in your business and can data be restored in case of a security incident? (caused unintentionally by an employee or as a result of a malicious attack)",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,

@@ -5,6 +5,7 @@ import Result from "./Components/Result";
 import "./App.css";
 import Form from "./Components/Form";
 import Admin from "./Components/Admin/Admin";
+import Login from "./Components/Admin/Login";
 function App() {
   return (
     <div className="app">
@@ -15,6 +16,7 @@ function App() {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/result" element={<Result />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </div>
