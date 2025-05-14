@@ -96,7 +96,7 @@ export const questions = [
   },
   {
     question:
-      "Is your organization using Windows as operating system? If so, is it under license?",
+      "Is your organization using Microsoft products? If so, are they under license?",
     options: ["Yes", "No"],
     type: "multipleChoice",
     isScore: true,

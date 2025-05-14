@@ -12,8 +12,8 @@ function MyResponsiveTypography() {
       <Col xs={24} sm={24} md={24} lg={24} className="centerColumContent">
         <div className="content">
           Welcome to our security assessment questionnaire. The response
-          provided will help us to customize the recommendations for enhancing
-          the security environment in your organization.
+          provided will help us customize recommendations for enhancing the
+          security environment in your organization.
         </div>
       </Col>
       <Col xs={24} sm={24} md={24} lg={24} className="centerColumContent">
