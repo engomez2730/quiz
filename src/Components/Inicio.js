@@ -34,6 +34,15 @@ function MyResponsiveTypography() {
             Start Assessment
           </Button>
         </Link>
+        <Link to="/form">
+          <Button
+            type="primary"
+            size="large"
+            style={{ marginTop: "90px", background: "#fff", color: "blue" }}
+          >
+            Go Admin
+          </Button>
+        </Link>
       </Col>
     </Row>
   );
