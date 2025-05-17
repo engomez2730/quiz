@@ -34,7 +34,7 @@ function MyResponsiveTypography() {
             Start Assessment
           </Button>
         </Link>
-        <Link to="/form">
+        <Link to="/admin">
           <Button
             type="primary"
             size="large"
