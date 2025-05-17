@@ -12,7 +12,9 @@ const Admin = () => {
   const [usuarioSelecionado, usuarioSelecionadoSet] = useState([]);
 
   const getData = async () => {
-    const data = await axios.get("http://localhost:5000/api/v1/questions");
+    const data = await axios.get(
+      "https://quizbackend-jrlu.onrender.com/api/v1/questions"
+    );
     console.log(data.data);
     setUsers(data.data.data);
   };
