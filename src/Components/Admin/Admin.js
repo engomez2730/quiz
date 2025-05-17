@@ -13,7 +13,8 @@ const Admin = () => {
 
   const getData = async () => {
     const data = await axios.get("http://localhost:5000/api/v1/questions");
-    setUsers(data.data.user);
+    console.log(data.data);
+    setUsers(data.data.data);
   };
 
   const handleOkEdit = () => {

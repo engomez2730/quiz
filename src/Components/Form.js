@@ -1,9 +1,7 @@
-import React from "react";
 import { setUser } from "../Redux/Slices/UserSLice";
 import { Button, Col, Form, Input, Row, message } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import "./Form.css";
 
